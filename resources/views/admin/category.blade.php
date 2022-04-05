@@ -1,0 +1,164 @@
+@extends('admin.layouts.adminpage')
+@section('content')
+<div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Create Category</h3>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="/category">Category</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+</div>
+<div class="mt-2 container-fluid">
+@if($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> {{$message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+@endif
+    <!-- Form -->
+        <div>
+        {{ Form::open(array('action' => 'categoryController@store','enctype'=>'multipart/form-data')) }}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        {{Form::label('txtcateName','Name:')}}
+                        {{Form::text('txtcateName',Input::old('txtcateName'),
+                            array('placeholder'=>'Enter Category Name','class'=>'form-control','required'))}}
+                        </div>
+                    <div class="col">
+                        {{Form::label('txtstatus','Status:')}}
+                        {{Form::select('txtstatus', array(
+                            '1'=>'Enable',
+                            '0'=>'Disable'), null, ['class' => 'form-control'])}}
+                    </div>
+                </div>
+                <div class="mt-4">
+                    {{Form::label('txtdesc','Description:')}}
+                    {!! Form::textarea('txtdesc',null, array('class'=>'form-control', 
+                    'rows' => 5, 'cols' => 50)) !!}
+                </div>
+                <div class="mt-5">
+                    {!! Form::submit('Save', array('class' => 'btn btn-primary w-25')) !!}
+                    {!! Form::reset('Clear', array('class' => 'btn btn-dark w-25')) !!}
+                </div>
+            </div>
+        {{ Form::close() }}
+        </div>
+
+    <!-- Table List -->
+        <div>
+            <table class="table table-hover table-primary">
+                <thead class="bg-primary text-white">
+                    <th class="text-center">#ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
+                </thead>
+                <tbody>
+                
+                @foreach($cateData as $cateDatas)
+                    <tr>
+                        <td class="text-center">
+                            {{$cateDatas['cateID']}}
+                        </td>
+                        <td>
+                            {{$cateDatas['name']}}
+                        </td>
+                        <td>
+                            {{$cateDatas['description']}}
+                        </td>
+                        <td class="text-center">
+                            <a href="{{route('category.endisable',['id'=>$cateDatas['cateID']])}}">
+                            @if($cateDatas['status'] == 1)
+                                    <box-icon type='solid' name='show'></box-icon>
+                            @else
+                                    <box-icon name='hide' type='solid' ></box-icon>
+                            @endif
+                            </a>
+                            
+                        </td>
+                        <td class="text-center">
+                            <a href="#">
+                                <box-icon name='edit' data-toggle="modal" data-target="#updateModal{{$cateDatas['cateID']}}"></box-icon>
+                            </a>
+                            <a href="#">
+                                <box-icon type='solid' name='trash' data-toggle="modal" data-target="#Modal{{$cateDatas['cateID']}}"></box-icon>
+                            </a>
+                        </td>
+                    </tr>
+                    	<!-- Delete Modal -->
+                        <div class="modal fade" id="Modal{{$cateDatas['cateID']}}" tabindex="-1" role="dialog" aria-labelledby="Modal{{$cateDatas['cateID']}}" aria-hidden="true">
+                            <div class="modal-dialog " role="document">
+                                <div class="modal-content alert-warning">
+									<div class="modal-header">
+										<h3 class="modal-title" id="Modal{{$cateDatas['cateID']}}"><strong>Your Message</strong></h3>
+									</div>
+									<div class="modal-body">
+										Do you want to delete this record ?
+									</div>
+									<div class="modal-footer">
+										
+                                        {{form::open(['method'=>'DELETE','route'=>['category.destroy',$cateDatas['cateID']]])}}
+                                            {{form::button('Yes',['type'=>'submit','class'=>'btn btn-primary w-25'])}}
+                                        {{form::close()}}
+										<button type="button" class="btn btn-secondary w-25" data-dismiss="modal">No</button>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- update Modal -->
+                        <div class="modal fade" id="updateModal{{$cateDatas['cateID']}}" tabindex="-1" role="dialog" aria-labelledby="updateModal{{$cateDatas['cateID']}}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content alert-warning">
+									<div class="modal-header">
+										<h3 class="modal-title" id="updateModal{{$cateDatas['cateID']}}"><strong>Update Category</strong></h3>
+									</div>
+									<div class="modal-body">
+                                    <form action="{{route('category.update',['id'=>$cateDatas['cateID']])}}" enctype="multipart/form-data" method="PUT">
+                                    
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col">
+                                                    {{Form::label('uptxtcateName','Update Name:')}}
+                                                        {{  Form::text('uptxtcateName',$cateDatas['name'], array('class' => 'form-control','required'))  }}
+                                                    </div>
+                                                <div class="col">
+                                                    {{Form::label('uptxtstatus','Update Status:')}}
+                                                    {{Form::select('uptxtstatus', array(
+                                                        '1'=>'Enable',
+                                                        '0'=>'Disable'), $cateDatas['status'], ['class' => 'form-control'])}}
+                                                </div>
+                                            </div>
+                                            <div class="mt-4">
+                                                {{Form::label('uptxtdesc','Update Description:')}}
+                                                {!! Form::textarea('uptxtdesc',$cateDatas['description'], array('class'=>'form-control', 
+                                                'rows' => 5, 'cols' => 50)) !!}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success w-25">Update</button>
+                                            <button type="button" class="btn btn-secondary w-25" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                        </form>
+									</div>
+									
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+                </tbody>
+            </table>
+            {{$cateData->links('pagination::bootstrap-4')}}
+        </div>
+</div>
+@endsection 
