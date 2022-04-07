@@ -53,6 +53,7 @@
             </div>
         {{ Form::close() }}
         </div>
+        
     <!-- Table List -->
         <div>
             <table class="table table-hover table-primary">
@@ -83,7 +84,6 @@
                                     <box-icon name='hide' type='solid' ></box-icon>
                             @endif
                             </a>
-                            
                         </td>
                         <td class="text-center">
                             <a href="{{route('category.edit',['id'=>$category['cateID']])}}">
