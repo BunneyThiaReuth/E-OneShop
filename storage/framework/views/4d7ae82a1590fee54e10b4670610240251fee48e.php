@@ -43,5 +43,4 @@
     <script src="<?php echo e(URL::asset('admin/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('admin/dist/js/pages/dashboards/dashboard1.min.js')); ?>"></script>
 </body>
-
 </html>

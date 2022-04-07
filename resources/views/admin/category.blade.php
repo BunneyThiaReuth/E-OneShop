@@ -26,7 +26,7 @@
 @endif
     <!-- Form -->
         <div>
-        {{ Form::open(array('action' => 'categoryController@store','enctype'=>'multipart/form-data')) }}
+            {{ Form::open(array('action' => 'categoryController@store','enctype'=>'multipart/form-data')) }}
             <div class="form-group">
                 <div class="row">
                     <div class="col">
@@ -64,7 +64,6 @@
                     <th class="text-center">Action</th>
                 </thead>
                 <tbody>
-                
                 @foreach($categories as $category)
                     <tr>
                         <td class="text-center">

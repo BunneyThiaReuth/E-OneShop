@@ -9,20 +9,19 @@
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
                         <!-- Logo icon -->
-                        <a href="index.html">
+                        <a href="#">
                             <b class="logo-icon">
                                 <!-- Dark Logo icon -->
-                                <img src="admin/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                <img src="{{ URL::asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo icon -->
-                                <img src="admin/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                                <img src="{{ URL::asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img src="admin/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo text -->
-                                <img src="admin/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                                <strong>E-OneShop</strong>
+                                <!-- <img src="{{ URL::asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
+                                <img src="{{ URL::asset('admin/assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" /> -->
                             </span>
                         </a>
                     </div>
@@ -162,7 +161,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="admin/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
+                                <img src="{{ URL::asset('admin/assets/images/users/profile-pic.jpg')}}" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
                                         class="text-dark">Jason Doe</span> <i data-feather="chevron-down"
