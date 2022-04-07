@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\categorys;
 use Illuminate\Http\Request;
+use DB;
+use Session;
 class categoryController extends Controller
 {
     /**
@@ -12,8 +14,8 @@ class categoryController extends Controller
      */
     public function index()
     {
-        $cateData = categorys::paginate(5);
-        return view('admin.category',compact('cateData'));
+        $categories = categorys::paginate(5);
+        return view('admin.category',compact('categories'));
     }
 
     /**
@@ -23,7 +25,7 @@ class categoryController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -41,7 +43,6 @@ class categoryController extends Controller
         $category -> status = $data['txtstatus'];
 
         $category -> save();
-
         return Redirect('/category')->with('success', 'This record inserted is successfully...');
     }
 
@@ -53,7 +54,7 @@ class categoryController extends Controller
      */
     public function show($id)
     {
-        return Redirect('/category')->with('success', 'This record updated is successfully...');
+        
     }
 
     /**
@@ -64,7 +65,9 @@ class categoryController extends Controller
      */
     public function edit($id)
     {
-
+        $catforedit = Categorys::find($id);
+        $categories = Categorys::paginate(5);
+        return view('admin.category',compact('categories', 'catforedit'));
     }
 
     /**
