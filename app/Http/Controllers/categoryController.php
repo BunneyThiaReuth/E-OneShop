@@ -66,8 +66,8 @@ class categoryController extends Controller
     public function edit($id)
     {
         $catforedit = Categorys::find($id);
-        $categories = Categorys::paginate(5);
-        return view('admin.category',compact('categories', 'catforedit'));
+        $categories = categorys::paginate(5);
+        return view('admin.updateCate',compact('categories','catforedit'));
     }
 
     /**
@@ -79,7 +79,14 @@ class categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $category = Categorys::find($id);
+        $data = $request->input();
+        $category -> name = $data['txtcateName'];
+        $category -> description = $data['txtdesc'];
+        $category -> status = $data['txtstatus'];
+
+        $category -> save();
+        return Redirect('/category')->with('success', 'This record updated is successfully...');
     }
 
     /**

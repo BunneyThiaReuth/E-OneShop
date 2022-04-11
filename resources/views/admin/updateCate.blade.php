@@ -16,45 +16,36 @@
                 </div>
 </div>
 <div class="mt-2 container-fluid">
-@if($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> {{$message}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-@endif
 <!-- ADD Form -->
         <div>
-            {{ Form::open(array('action' => 'categoryController@store','enctype'=>'multipart/form-data')) }}
+            {{ Form::open(array('action' => array('categoryController@update',$catforedit['cateID']),'method'=>'put','enctype'=>'multipart/form-data')) }}
             <div class="form-group">
                 <div class="row">
                     <div class="col">
                         {{Form::label('txtcateName','Name:')}}
-                        {{Form::text('txtcateName',Input::old('txtcateName'),
-                            array('placeholder'=>'Enter Category Name','class'=>'form-control','required'))}}
+                        {{Form::text('txtcateName', $catforedit['name'], array('class' => 'form-control','required'))}}
                         </div>
                     <div class="col">
                         {{Form::label('txtstatus','Status:')}}
                         {{Form::select('txtstatus', array(
                             '1'=>'Enable',
-                            '0'=>'Disable'), null, ['class' => 'form-control'])}}
+                            '0'=>'Disable'), $catforedit['status'], ['class' => 'form-control'])}}
                     </div>
                 </div>
                 <div class="mt-4">
                     {{Form::label('txtdesc','Description:')}}
-                    {!! Form::textarea('txtdesc',null, array('class'=>'form-control', 
+                    {!! Form::textarea('txtdesc',$catforedit['description'], array('class'=>'form-control', 
                     'rows' => 5, 'cols' => 50)) !!}
                 </div>
                 <div class="mt-5">
-                    {!! Form::submit('Save', array('class' => 'btn btn-primary w-25')) !!}
-                    {!! Form::reset('Clear', array('class' => 'btn btn-dark w-25')) !!}
+                    {!! Form::submit('Update', array('class' => 'btn btn-primary w-25')) !!}
+                    <a href="/category" class="btn btn-dark w-25">Back</a>
                 </div>
             </div>
         {{ Form::close() }}
         </div>
     <!-- Table List -->
-        <div>
+    <div>
             <table class="table table-hover table-primary">
                 <thead class="bg-primary text-white">
                     <th class="text-center">#ID</th>
