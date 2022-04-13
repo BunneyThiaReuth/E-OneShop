@@ -10,10 +10,12 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Applications</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="/ticketlist"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">Ticket List
-                                </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="/image" aria-expanded="false">
+                                <i data-feather="image" class="feather-icon"></i>
+                                <span
+                                    class="hide-menu">Image
+                                </span>
+                            </a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/chat"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
@@ -28,9 +30,10 @@
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">Products </span></a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="/addproducts" class="sidebar-link"><span
-                                            class="hide-menu"> Add Products
-                                        </span></a>
+                                <li class="sidebar-item">
+                                    <a href="/addproducts" class="sidebar-link">
+                                        <span class="hide-menu"> Add Products</span>
+                                    </a>
                                 </li>
                                 <li class="sidebar-item"><a href="/listproducts" class="sidebar-link"><span
                                             class="hide-menu"> List Products

@@ -53,6 +53,7 @@ Route::get('/addproducts',function(){
 Route::get('/listproducts',function(){
     return view('admin.listproducts');
 });
+Route::resource('/image','imageController');
 Route::resource('/category','categoryController');
 Route::get('/category/endisable/{id}','categoryController@endisable')->name('category.endisable');
 Route::get('/login',function(){
