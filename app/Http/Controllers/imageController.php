@@ -96,7 +96,8 @@ class imageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        
     }
 
     /**
@@ -107,6 +108,22 @@ class imageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = image::find($id);
+        if(!is_null($image['imgname']))
+        {
+            $img = $image['imgname'];
+            $path = public_path('img/images/'.$img);
+            $thpath = public_path('img/images/thumbnail/'.$img);
+            unlink($path);
+            unlink($thpath);
+            $image->delete();
+            return Redirect('/image')->with('success', 'This record deleted is successfully...');
+        }
+        else
+        {
+            $image->delete();
+            return Redirect('/image')->with('success', 'This record deleted is successfully...');
+        }
+        
     }
 }

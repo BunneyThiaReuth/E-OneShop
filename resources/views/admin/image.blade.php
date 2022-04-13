@@ -30,6 +30,14 @@
 					</div>
 					 <div class="container-fluid">
 						 <div class="mt-3">
+                        @if($message = Session::get('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success!</strong> {{$message}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                        @endif
                          {{ Form::open(array('action' => 'imageController@store','enctype'=>'multipart/form-data')) }}
 								<div class="row">
 									<div class="col-3">
@@ -82,10 +90,31 @@
 															<box-icon name='edit-alt'></box-icon>
 														</a>
 														<a href="#">
-															<box-icon name='trash' type='solid' ></box-icon>
+															<box-icon name='trash' type='solid' data-toggle="modal" data-target="#deleteModal{{$images['imgID']}}"></box-icon>
 														</a>
 													</td>
 												</tr>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="deleteModal{{$images['imgID']}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{$images['imgID']}}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="deleteModal{{$images['imgID']}}">Your Message</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                           Are you sure to delete this record ?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        {{form::open(['method'=>'DELETE','route'=>['image.destroy',$images['imgID']]])}}
+                                                            {{form::button('Yes',['type'=>'submit','class'=>'btn btn-primary w-25'])}}
+                                                        {{form::close()}}
+                                                            <button type="button" class="btn btn-secondary w-25" data-dismiss="modal">No</button>
+                                                            
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                             @endforeach
 											</tbody>
 										</table>
