@@ -84,7 +84,10 @@ class imageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $imgforedit = image::find($id);
+        $image = image::paginate(5);
+        return view('admin.Editimage',compact('image','imgforedit'));
+
     }
 
     /**
@@ -96,8 +99,32 @@ class imageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        
+        $image = image::find($id);
+        $data = $request->input();
+        $image -> desc = $data['txt_updesc'];
+        $oldimg = $data['oldimg'];
+        if($request->hasFile('txt_upimage'))
+        {
+            $mytime = time();
+            $imagename = $mytime.$request->file('txt_upimage')->getClientOriginalName();
+            
+            $path = public_path('img/images/');
+            $request->file('txt_upimage')->move($path,$imagename);
+
+            $image -> imgname = $imagename;
+
+            $thumbnail_path = public_path('img/images/thumbnail/');
+			$thumbnail_name = $mytime.$request->file('txt_upimage')->getClientOriginalName();
+            $original_img = $path. $imagename;
+            $thumbnail_img = Imageivn::make($original_img)->resize(100, 100, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            unlink($path.$oldimg);
+            unlink($thumbnail_path.$oldimg);
+            $thumbnail_img->save($thumbnail_path.$thumbnail_name);
+        }
+        $image -> save();
+        return Redirect('/image')->with('success', 'This record updated is successfully...');
     }
 
     /**

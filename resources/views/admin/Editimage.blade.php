@@ -30,23 +30,16 @@
 					</div>
 					 <div class="container-fluid">
 						 <div class="mt-3">
-                        @if($message = Session::get('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Success!</strong> {{$message}}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                        @endif
-                         {{ Form::open(array('action' => 'imageController@store','enctype'=>'multipart/form-data')) }}
+                         {{ Form::open(array('action' => array('imageController@update',$imgforedit['imgID']),'method'=>'put','enctype'=>'multipart/form-data')) }}
 								<div class="row">
 									<div class="col-3">
 										<div class="rounded mb-4 img-thumbnail" style="width:200px;height:200px;">
-											<img id="previewImg" src="{{ URL::asset('admin/assets/images/noimage.png')}}" width="100%" height="100%" class="rounded">
+											<input type="hidden" value="{{$imgforedit['imgname']}}" name="oldimg">
+											<img id="previewImg" src="{{URL::asset('img/images/'.$imgforedit['imgname'])}}" width="100%" height="100%" class="rounded">
 									   </div>
 										<div style="width:200px;">
 												<div class="custom-file">
-													<input type="file" name="txt_image" class="custom-file-input" onchange="previewFile(this);" id="customFile" required/>
+													<input type="file" name="txt_upimage" class="custom-file-input" onchange="previewFile(this);" id="customFile"/>
 													<input type="button" class="custom-file-label btn bg-danger text-white w-100" value="Upload Image" for="customFile">
 												</div>
 										</div>
@@ -54,10 +47,10 @@
 									<div class="col">
 										<div class="row">
 											<div class="col" >
-												<textarea class="form-control" rows="8" name="txt_desc" placeholder="Description"></textarea>
+												<textarea class="form-control" rows="8" name="txt_updesc" placeholder="Description">{{$imgforedit['desc']}}</textarea>
 												<div class="mt-3">
-													<button type="submit" class="btn btn-primary w-25">Save</button>
-                                                	<button type="reset" class="btn btn-dark w-25">Clear</button>
+													<button type="submit" class="btn btn-primary w-25">Update</button>
+                                                	<a href="/image" class="btn btn-dark w-25">Back</a>
 												</div>
 												
 											</div>

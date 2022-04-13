@@ -67,7 +67,7 @@ class categoryController extends Controller
     {
         $catforedit = Categorys::find($id);
         $categories = categorys::paginate(5);
-        return view('admin.updateCate',compact('categories','catforedit'));
+        return view('admin.category',compact('categories','catforedit'));
     }
 
     /**
