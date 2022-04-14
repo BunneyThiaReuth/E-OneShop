@@ -39,8 +39,12 @@
                                             class="hide-menu"> List Products
                                         </span></a>
                                 </li>
-                                <li class="sidebar-item"><a href="{{route('category.index')}}" class="sidebar-link"><span
+                                <li class="sidebar-item"><a href="/category" class="sidebar-link"><span
                                             class="hide-menu"> Category
+                                        </span></a>
+                                </li>
+                                <li class="sidebar-item"><a href="/discount" class="sidebar-link"><span
+                                            class="hide-menu"> Discount
                                         </span></a>
                                 </li>
                             </ul>

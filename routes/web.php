@@ -47,9 +47,9 @@ Route::get('/chat',function(){
 Route::get('/calenda',function(){
     return view('admin.calenda');
 });
-Route::get('/addproducts',function(){
-    return view('admin.addproducts');
-});
+Route::resource('/addproducts','addProductsController');
+Route::resource('/discount','discountController');
+Route::get('/discount/endisable/{id}','discountController@endisable')->name('discount.endisable');
 Route::get('/listproducts',function(){
     return view('admin.listproducts');
 });

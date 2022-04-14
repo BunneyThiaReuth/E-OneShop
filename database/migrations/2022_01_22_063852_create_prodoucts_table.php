@@ -21,6 +21,7 @@ class CreateProdouctsTable extends Migration
             $table->integer('qty');
             $table->double('price');
             $table->integer('discountID');
+            $table->string('desc');
 
             $table->foreign('imgID')->references('imgID')->on('tbl_image');
             $table->foreign('cateID')->references('cateID')->on('tbl_category');

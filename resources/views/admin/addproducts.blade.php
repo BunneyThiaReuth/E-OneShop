@@ -1,5 +1,12 @@
 @extends('admin.layouts.adminpage')
 @section('content')
+<?php
+    $servname = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "eoneshop";
+	$conn = mysqli_connect($servname,$user,$pass,$db);
+?>
 <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
@@ -13,9 +20,93 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="col-5 align-self-center">
-
-                    </div>
                 </div>
+                {{ Form::open(array('action' => 'categoryController@store','enctype'=>'multipart/form-data')) }}
+                	<div class="row mt-3">
+						<div class="col">
+							<label class="form-label">Select Image:</label>
+							<select class="form-control" name="txt_image" required>
+								<option value="">--Select--</option>
+                                <?php
+                                    
+                                    $getimage = "SELECT * FROM `tbl_image`";
+                                    $rungetimage = mysqli_query($conn,$getimage);
+									while($imgrows = mysqli_fetch_array($rungetimage))
+									{
+                                ?>
+                                <option value="<?=$imgrows['imgID']?>">
+									#<?=$imgrows['imgID']."_".$imgrows['desc']?>
+								</option>
+								<?php
+									}
+								?>
+							</select>
+						</div>
+						<div class="col">
+							<label class="form-label">Select Category:</label>
+							<select class="form-control" name="txt_category" required>
+								<option value="">--Select--</option>
+
+                                <?php
+                                    
+                                    $getcate = "SELECT * FROM `tbl_category` WHERE `status`=1";
+                                    $rungetcate = mysqli_query($conn,$getcate);
+									while($caterows = mysqli_fetch_array($rungetcate))
+									{
+                                ?>
+                                <option value="<?=$caterows['cateID']?>">
+									#<?=$caterows['cateID']."_".$caterows['name']?>
+								</option>
+								<?php
+									}
+								?>
+
+							</select>
+						</div>
+					</div>
+					<div class="row mt-3">
+						<div class="col">
+							<label class="form-label">Name:</label>
+							<input type="text" class="form-control" name="txt_pname" placeholder="Enter product name" required>
+						</div>
+						<div class="col">
+							<label class="form-label">Quantity:</label>
+							<input type="number" class="form-control" name="txt_qty" placeholder="Enter quantity" required>
+						</div>
+						<div class="col">
+							<label class="form-label">Price:</label>
+							<input type="number" class="form-control" name="txt_price" placeholder="Enter price" required>
+						</div>
+						<div class="col">
+							<label class="form-label">Select discount:</label>
+							<select class="form-control" name="txt_discount" required>
+								<option value="">--Select--</option>
+								<?php
+                                    
+                                    $getdis = "SELECT * FROM `tbl_discount` WHERE `status`=1";
+                                    $rungetdis = mysqli_query($conn,$getdis);
+									while($disrows = mysqli_fetch_array($rungetdis))
+									{
+                                ?>
+                                <option value="<?=$disrows['discountID']?>">
+									#<?=$disrows['discountID']."_$".$disrows['discountPerent']?>
+								</option>
+								<?php
+									}
+								?>
+							</select>
+						</div>
+					</div>
+					<div class="row mt-3">
+						<div class="col">
+							<label class="form-label">Description:</label>
+							<textarea class="form-control" rows="10" name="txt_desc" placeholder="Description"></textarea>
+						</div>
+					</div>
+					<div class="mt-3">
+						<button type="submit" class="btn btn-primary w-25">Save</button>
+						<button type="reset" class="btn btn-dark w-25">Clear</button>
+					</div>
+                {{ Form::close() }}
             </div>
 @endsection
