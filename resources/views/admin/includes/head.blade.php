@@ -14,6 +14,7 @@
     <link href="{{ URL::asset('admin/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
 
     <link href="{{ URL::asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
+    
     <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
 
 </head>

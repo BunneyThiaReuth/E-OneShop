@@ -21,7 +21,22 @@
                         </div>
                     </div>
                 </div>
-                {{ Form::open(array('action' => 'categoryController@store','enctype'=>'multipart/form-data')) }}
+				@if($message = Session::get('success'))
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!</strong> {{$message}}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+		@elseif($message = Session::get('error'))
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>Success!</strong> {{$message}}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+		@endif
+                {{ Form::open(array('action' => 'addProductsController@store','enctype'=>'multipart/form-data')) }}
                 	<div class="row mt-3">
 						<div class="col">
 							<label class="form-label">Select Image:</label>
@@ -75,7 +90,7 @@
 						</div>
 						<div class="col">
 							<label class="form-label">Price:</label>
-							<input type="number" class="form-control" name="txt_price" placeholder="Enter price" required>
+							<input type="text" class="form-control" name="txt_price" placeholder="Enter price" required>
 						</div>
 						<div class="col">
 							<label class="form-label">Select discount:</label>

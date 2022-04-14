@@ -50,9 +50,7 @@ Route::get('/calenda',function(){
 Route::resource('/addproducts','addProductsController');
 Route::resource('/discount','discountController');
 Route::get('/discount/endisable/{id}','discountController@endisable')->name('discount.endisable');
-Route::get('/listproducts',function(){
-    return view('admin.listproducts');
-});
+Route::resource('/listproducts','listProdcutsController');
 Route::resource('/image','imageController');
 Route::resource('/category','categoryController');
 Route::get('/category/endisable/{id}','categoryController@endisable')->name('category.endisable');
