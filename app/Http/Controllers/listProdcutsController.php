@@ -18,7 +18,7 @@ class listProdcutsController extends Controller
                                 ->join('tbl_category','tbl_products.cateID','=','tbl_category.cateID')
                                 ->join('tbl_discount','tbl_products.discountID','=','tbl_discount.discountID')
                                 ->select('tbl_products.*','tbl_image.imgname as imgname', 'tbl_category.name as catename', 'tbl_discount.discountPerent as disc')
-                                ->paginate(10);
+                                ->paginate(5);
         return view('admin.listproducts',compact('listpro'));
     }
 
