@@ -36,37 +36,28 @@
             
                         <div class="sidebar__item">
                             <div class="latest-product__text">
-                                <h4>Latest Products</h4>
+                                <h4>Latest 10 Products</h4>
                                 <div class="latest-product__slider owl-carousel">
 									
                                     <div class="latest-prdouct__slider__item">
+										<?php
+											$lastPor='SELECT tbl_products.proID as "proID", tbl_image.imgname as "imgname", tbl_products.name as "name", tbl_category.name as "cname", tbl_products.qty as "qty", tbl_products.price as "price", tbl_discount.discountPerent as "discountPerent", tbl_products.desc as "desc",tbl_products.price - tbl_discount.discountPerent as "saleOff" FROM `tbl_products` INNER JOIN tbl_discount on tbl_products.discountID = tbl_discount.discountID INNER JOIN tbl_image on tbl_products.imgID = tbl_image.imgID INNER JOIN tbl_category on tbl_products.cateID = tbl_category.cateID ORDER BY `proID` DESC LIMIT 10;';
+											$runlastPor = mysqli_query($conn,$lastPor);
+											while($getrowlastPor = mysqli_fetch_array($runlastPor))
+											{
+										?>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-1.jpg" alt="">
+                                                <img src="img/images/thumbnail/<?=$getrowlastPor["imgname"]?>" alt="<?=$getrowlastPor["imgname"]?>" style="width: 50px;height: 50px" >
                                             </div>
                                             <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
+                                                <h6><?=$getrowlastPor['name']?></h6>
+                                                <span>$<?= number_format($getrowlastPor['saleOff'],2) ?></span>
                                             </div>
                                         </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-2.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-3.jpg" alt="">
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>Crab Pool Security</h6>
-                                                <span>$30.00</span>
-                                            </div>
-                                        </a>
+										<?php
+											}
+										?>
                                     </div>
                                     
                                 </div>
@@ -78,6 +69,16 @@
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
                             <h2>Sale Off</h2>
+							<div class="filter__found">
+								<?php
+									$disnumpro = "SELECT COUNT(`proID`) as 'dinum' FROM `tbl_products`
+									INNER JOIN tbl_discount on tbl_products.discountID = tbl_discount.discountID
+									WHERE tbl_discount.discountPerent>0;";
+									$rundisnumpro= mysqli_query($conn,$disnumpro);
+									$discountrow = mysqli_fetch_array($rundisnumpro);
+								?>
+                                    <h6>All Discounts <span><?="(".$discountrow['dinum'].")"?></span></h6>
+                              </div>
                         </div>
 
                         <div class="row">
@@ -120,20 +121,30 @@
                             </div>
                         </div>
                     </div>
-
+					<?php
+								$pro='SELECT tbl_products.proID as "proID", tbl_image.imgname as "imgname", tbl_products.name as "name", tbl_category.name as "cname", tbl_products.qty as "qty", tbl_products.price as "price", tbl_discount.discountPerent as "discountPerent", tbl_products.desc as "desc",tbl_products.price - tbl_discount.discountPerent as "saleOff" FROM `tbl_products` INNER JOIN tbl_discount on tbl_products.discountID = tbl_discount.discountID INNER JOIN tbl_image on tbl_products.imgID = tbl_image.imgID INNER JOIN tbl_category on tbl_products.cateID = tbl_category.cateID;';
+								$numpro = "SELECT COUNT(`proID`) as 'num' FROM `tbl_products`";
+								$runnumpro= mysqli_query($conn,$numpro);
+								$countrow = mysqli_fetch_array($runnumpro);
+								$runpro= mysqli_query($conn,$pro);
+					?>
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                    <h6>All Products <span><?="(".$countrow['num'].")"?></span></h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
+						<?php
+									while($getrunpro = mysqli_fetch_array($runpro))
+									{
+							?>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                <div class="product__item__pic set-bg" data-setbg="img/images/<?=$getrunpro["imgname"]?>">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -141,12 +152,14 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
+                                    <h6><a href="#"><?=$getrunpro['name']?></a></h6>
+                                    <h5>$<?=number_format($getrunpro['saleOff'],2)?></h5>
                                 </div>
                             </div>
                         </div>
-                        
+                        <?php
+							}
+						?>
                     </div>
                     <div class="product__pagination">
                         <a href="#">1</a>
