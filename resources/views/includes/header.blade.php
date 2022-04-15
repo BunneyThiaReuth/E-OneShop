@@ -31,7 +31,8 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./"><img src="img/logo.png" alt=""></a>
+                        <a href="./"><img src="{{ URL::asset('admin/assets/images/logo-icon.png')}}" alt="" style="width: 80px"></a>
+                        <span><h3><strong class="text-primary">E</strong><strong class="text-success">-One</strong><strong class="text-danger">Shop</strong></h3></span>
                     </div>
                 </div>
                 <div class="col-lg-6">
