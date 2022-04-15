@@ -44,7 +44,7 @@
 								<option value="">--Select--</option>
                                 <?php
                                     
-                                    $getimage = "SELECT * FROM `tbl_image`";
+                                    $getimage = "SELECT * FROM `tbl_image` ORDER BY `imgID` DESC";
                                     $rungetimage = mysqli_query($conn,$getimage);
 									while($imgrows = mysqli_fetch_array($rungetimage))
 									{
@@ -64,7 +64,7 @@
 
                                 <?php
                                     
-                                    $getcate = "SELECT * FROM `tbl_category` WHERE `status`=1";
+                                    $getcate = "SELECT * FROM `tbl_category` WHERE `status`=1 ORDER BY `cateID` DESC";
                                     $rungetcate = mysqli_query($conn,$getcate);
 									while($caterows = mysqli_fetch_array($rungetcate))
 									{
@@ -98,7 +98,7 @@
 								<option value="">--Select--</option>
 								<?php
                                     
-                                    $getdis = "SELECT * FROM `tbl_discount` WHERE `status`=1";
+                                    $getdis = "SELECT * FROM `tbl_discount` WHERE `status`=1 ORDER BY `discountID` DESC";
                                     $rungetdis = mysqli_query($conn,$getdis);
 									while($disrows = mysqli_fetch_array($rungetdis))
 									{

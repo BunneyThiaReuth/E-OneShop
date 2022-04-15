@@ -49,7 +49,7 @@
 				</div>
 				<div class="col">
 					<label class="form-lable">Discount Perent$ :</label>
-					<input type="number" class="form-control" name="txt_disperent" placeholder="Enter discount perent" required>
+					<input type="text" class="form-control" name="txt_disperent" placeholder="Enter discount perent" required>
 				</div>
 				<div class="col">
 					<label class="form-lable">Status :</label>

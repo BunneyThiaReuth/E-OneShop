@@ -17,7 +17,7 @@ class CreateDiscountTable extends Migration
             $table->increments('discountID');
             $table->string('name');
             $table->text('description');
-            $table->integer('discountPerent');
+            $table->decimal('discountPerent');
             $table->string('startDate');
             $table->string('endDate');
             $table->integer('status');

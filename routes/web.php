@@ -41,12 +41,11 @@ Route::get('/admins',function(){
 Route::get('/ticketlist',function(){
     return view('admin.ticketlist');
 });
-Route::get('/chat',function(){
-    return view('admin.chat');
-});
 Route::get('/calenda',function(){
     return view('admin.calenda');
 });
+Route::resource('/sliders','sliderController');
+Route::get('/sliders/sliders/{id}','sliderController@endisable')->name('sliders.endisable');
 Route::resource('/addproducts','addProductsController');
 Route::resource('/discount','discountController');
 Route::get('/discount/endisable/{id}','discountController@endisable')->name('discount.endisable');

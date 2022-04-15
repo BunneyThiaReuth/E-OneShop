@@ -10,9 +10,6 @@
     @include('includes.header')
     <!-- Header Section End -->
 
-    <!-- Hero Section Begin -->
-    @include('includes.heroSection')
-    <!-- Hero Section End -->
     
     @yield('content')
 

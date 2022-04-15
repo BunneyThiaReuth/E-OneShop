@@ -1,14 +1,15 @@
     @extends('layouts.default')
     @section('content')
+        @include('includes.heroSection')
         <!-- Categories Section Begin -->
         @include('includes.CategorySection')
         <!-- Categories Section End -->
-
+        
         <!-- Featured Section Begin -->
         @include('includes.FeaturdSection')
     
         <!-- Featured Section End -->
-
+        
         <!-- Banner Begin -->
         @include('includes.banner')
         <!-- Banner End -->
