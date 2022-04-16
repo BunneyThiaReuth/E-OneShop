@@ -34,7 +34,8 @@
 							<th>Quantity</th>	
 							<th>Price</th>	
 							<th>Discount</th>	
-							<th>Description</th>	
+							<th>Description</th>
+                            <th>Like</th>	
 							<th>Action</th>	
 						</thead>
 						<tbody>
@@ -50,6 +51,7 @@
                                 <td>${{$listpros['price']}}</td>
                                 <td>${{$listpros['disc']}}</td>
                                 <td>{{$listpros['desc']}}</td>
+                                <td>{{$listpros['liker']}}</td>
                                 <td>
                                 <a href="{{route('listproducts.edit',['id'=>$listpros['proID']])}}">
 									<box-icon name='edit-alt'></box-icon>

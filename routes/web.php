@@ -12,9 +12,8 @@
 */
 
 Route::get('/', 'homepage@Index');
-Route::get('/shop', function () {
-    return view('shop');
-});
+Route::resource('/shop','shopController');
+Route::get('/shop/shop/{id}','shopController@like')->name('shop.like');
 Route::get('/shopDetail', function () {
     return view('shopDetail');
 });
