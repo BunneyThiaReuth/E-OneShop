@@ -1,3 +1,4 @@
+<?php $page = '/ShoppingCart';?>
 @extends('layouts.default')
 @section('content')
     <!-- Breadcrumb Section Begin -->

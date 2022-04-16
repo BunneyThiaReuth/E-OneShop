@@ -1,3 +1,4 @@
+<?php $page = '/shop';?>
 @extends('layouts.default')
 @section('content')
 <?php
@@ -63,6 +64,38 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="sidebar__item">
+                            <div class="latest-product__text">
+                                <h4>Last Top 3 Reaction</h4>
+                                <div class="latest-product__slider owl-carousel">
+									
+                                    <div class="latest-prdouct__slider__item">
+										<?php
+											$like='SELECT tbl_products.proID as "proID",tbl_products.liker as "liker", tbl_image.imgname as "imgname", tbl_products.name as "name", tbl_category.name as "cname", tbl_products.qty as "qty", tbl_products.price as "price", tbl_discount.discountPerent as "discountPerent", tbl_products.desc as "desc",tbl_products.price - tbl_discount.discountPerent as "saleOff" FROM `tbl_products` INNER JOIN tbl_discount on tbl_products.discountID = tbl_discount.discountID INNER JOIN tbl_image on tbl_products.imgID = tbl_image.imgID INNER JOIN tbl_category on tbl_products.cateID = tbl_category.cateID WHERE `liker`>=50 ORDER BY `proID` DESC LIMIT 3;';
+											$runlike = mysqli_query($conn,$like);
+											while($rowLike = mysqli_fetch_array($runlike))
+											{
+										?>
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src="img/images/thumbnail/<?=$rowLike["imgname"]?>" alt="<?=$rowLike["imgname"]?>" style="width: 50px;height: 50px" >
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6><?=$rowLike['name']?></h6>
+                                                <span>$<?= number_format($rowLike['saleOff'],2) ?></span>
+                                                <p><?= "Like :". $rowLike['liker'] ?></p>
+                                            </div>
+                                        </a>
+										<?php
+											}
+										?>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
@@ -104,7 +137,7 @@
 												<ul class="product__item__pic__hover">
 													<li><a href="{{route('shop.like',['id'=>$getrowprodis['proID']])}}"><i class="fa fa-heart"></i></a></li>
 													
-													<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+													<li><a href="{{route('shop.shipping',['id'=>$getrowprodis['proID']])}}"><i class="fa fa-shopping-cart"></i></a></li>
 												</ul>
 											</div>
 											<div class="product__discount__item__text">
@@ -150,7 +183,7 @@
 											</a>
 										</li>
                                         
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="{{route('shop.shipping',['id'=>$pros['proID']])}}"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

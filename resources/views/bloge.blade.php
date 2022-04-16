@@ -1,3 +1,4 @@
+<?php $page = '/bloge';?>
 @extends('layouts.default')
 @section('content')
     <!-- Breadcrumb Section Begin -->

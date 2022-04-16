@@ -18,7 +18,7 @@ class shopController extends Controller
                                 ->join('tbl_category','tbl_products.cateID','=','tbl_category.cateID')
                                 ->join('tbl_discount','tbl_products.discountID','=','tbl_discount.discountID')
                                 ->select('tbl_products.*','tbl_products.liker as liker','tbl_image.imgname as imgname', 'tbl_category.name as catename', 'tbl_discount.discountPerent as disc')
-                                ->paginate(12);
+                                ->paginate(9);
         return view('shop',compact('pro'));
     }
 
@@ -62,7 +62,7 @@ class shopController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -96,5 +96,10 @@ class shopController extends Controller
         ->update(['liker' => $add]);
         $addlike->save();
         return Redirect('/shop');
+    }
+    public function shipping($id)
+    {
+        $shipp = addproducts::find($id);
+        return view('shopDetail' ,compact('shipp'));
     }
 }

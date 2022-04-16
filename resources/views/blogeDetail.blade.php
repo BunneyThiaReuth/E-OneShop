@@ -1,3 +1,4 @@
+<?php $page = '/blogeDetail';?>
 @extends('layouts.default')
 @section('content')
     <!-- Blog Details Hero Begin -->

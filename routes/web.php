@@ -14,9 +14,8 @@
 Route::get('/', 'homepage@Index');
 Route::resource('/shop','shopController');
 Route::get('/shop/shop/{id}','shopController@like')->name('shop.like');
-Route::get('/shopDetail', function () {
-    return view('shopDetail');
-});
+Route::get('/shop/shipping/{id}','shopController@shipping')->name('shop.shipping');
+Route::resource('/shopDetail','shopDetailController');
 Route::get('/ShoppingCart','ShoppingCartController@shoppingcart');
 Route::get('/checkout',function(){
     return view('checkout');
@@ -40,9 +39,8 @@ Route::get('/admins',function(){
 Route::get('/ticketlist',function(){
     return view('admin.ticketlist');
 });
-Route::get('/calenda',function(){
-    return view('admin.calenda');
-});
+Route::resource('/infor','infoController');
+Route::get('/infor/infor/{id}','infoController@endisable')->name('infor.endisable');
 Route::resource('/sliders','sliderController');
 Route::get('/sliders/sliders/{id}','sliderController@endisable')->name('sliders.endisable');
 Route::resource('/addproducts','addProductsController');

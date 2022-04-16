@@ -1,3 +1,4 @@
+    <?php $page = '/';?>
     @extends('layouts.default')
     @section('content')
         @include('includes.heroSection')

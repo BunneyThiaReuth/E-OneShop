@@ -1,3 +1,15 @@
+<?php $page = '/contact';?>
+<?php
+	$servname = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "eoneshop";
+	$conn = mysqli_connect($servname,$user,$pass,$db);
+
+	$sql = "SELECT * FROM `tbl_info` WHERE `instatus` =1 limit 1 ";
+	$runsql = mysqli_query($conn,$sql);
+	$row = mysqli_fetch_array($runsql);
+?>
 @extends('layouts.default')
 @section('content')
     <!-- Breadcrumb Section Begin -->
@@ -17,7 +29,13 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-
+	<?php
+		if(is_null($row))
+		{
+			echo("<div class='text-center mt-3'><h2>Information Not Found !</h2></div>");
+		}
+		else{
+	?>
     <!-- Contact Section Begin -->
     <section class="contact spad">
         <div class="container">
@@ -26,14 +44,14 @@
                     <div class="contact__widget">
                         <span class="icon_phone"></span>
                         <h4>Phone</h4>
-                        <p>+01-3-8888-6868</p>
+                        <p><?=$row['moblienumber']?></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_pin_alt"></span>
                         <h4>Address</h4>
-                        <p>60-49 Road 11378 New York</p>
+                        <p><?=$row['inaddress']?></p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
@@ -47,7 +65,7 @@
                     <div class="contact__widget">
                         <span class="icon_mail_alt"></span>
                         <h4>Email</h4>
-                        <p>hello@colorlib.com</p>
+                        <p><?=$row['email']?></p>
                     </div>
                 </div>
             </div>
@@ -57,22 +75,22 @@
 
     <!-- Map Begin -->
     <div class="map">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49116.39176087041!2d-86.41867791216099!3d39.69977417971648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca48c841038a1%3A0x70cfba96bf847f0!2sPlainfield%2C%20IN%2C%20USA!5e0!3m2!1sen!2sbd!4v1586106673811!5m2!1sen!2sbd"
-            height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <?=$row['linkmap']?>
         <div class="map-inside">
             <i class="icon_pin"></i>
             <div class="inside-widget">
-                <h4>New York</h4>
+                <h4><?=$row['incity']?></h4>
                 <ul>
-                    <li>Phone: +12-345-6789</li>
-                    <li>Add: 16 Creek Ave. Farmingdale, NY</li>
+                    <li>Phone: <?=$row['moblienumber']?></li>
+                    <li><?=$row['inaddress']?></li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- Map End -->
-
+<?php
+		}
+?>
     <!-- Contact Form Begin -->
     <div class="contact-form spad">
         <div class="container">

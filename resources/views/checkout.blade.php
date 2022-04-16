@@ -1,3 +1,4 @@
+<?php $page = '/checkout';?>
 @extends('layouts.default')
 @section('content')
     <!-- Breadcrumb Section Begin -->

@@ -20,9 +20,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/sliders"
                                 aria-expanded="false"><i data-feather="sliders" class="feather-icon"></i><span
                                     class="hide-menu">Slide Show</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/calenda"
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">Calendar</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/infor"
+                                aria-expanded="false"><i data-feather="info" class="feather-icon"></i><span
+                                    class="hide-menu">E-OneShop Infor</span></a></li>
 
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Components</span></li>
