@@ -71,6 +71,10 @@
                             <h2>Sale Off</h2>
 							<div class="filter__found">
 								<?php
+                                    $countallpro = "SELECT COUNT(`proID`) as 'allnum' FROM `tbl_products`";
+                                    $runcountallpro= mysqli_query($conn,$countallpro);
+                                    $allnum = mysqli_fetch_array($runcountallpro);
+
 									$disnumpro = "SELECT COUNT(`proID`) as 'dinum' FROM `tbl_products`
 									INNER JOIN tbl_discount on tbl_products.discountID = tbl_discount.discountID
 									WHERE tbl_discount.discountPerent>0;";
@@ -121,36 +125,27 @@
                             </div>
                         </div>
                     </div>
-					<?php
-								$pro='SELECT tbl_products.proID as "proID", tbl_image.imgname as "imgname", tbl_products.name as "name", tbl_category.name as "cname", tbl_products.qty as "qty", tbl_products.price as "price", tbl_discount.discountPerent as "discountPerent", tbl_products.desc as "desc",tbl_products.price - tbl_discount.discountPerent as "saleOff" FROM `tbl_products` INNER JOIN tbl_discount on tbl_products.discountID = tbl_discount.discountID INNER JOIN tbl_image on tbl_products.imgID = tbl_image.imgID INNER JOIN tbl_category on tbl_products.cateID = tbl_category.cateID;';
-								$numpro = "SELECT COUNT(`proID`) as 'num' FROM `tbl_products`";
-								$runnumpro= mysqli_query($conn,$numpro);
-								$countrow = mysqli_fetch_array($runnumpro);
-								$runpro= mysqli_query($conn,$pro);
-					?>
+
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6>All Products <span><?="(".$countrow['num'].")"?></span></h6>
+                                    <h6>All Products <span>({{$allnum['allnum']}})</span></h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-						<?php
-									while($getrunpro = mysqli_fetch_array($runpro))
-									{
-							?>
+                    @foreach($pro as $pros)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/images/<?=$getrunpro["imgname"]?>">
+                                <div class="product__item__pic set-bg" data-setbg="img/images/{{$pros['imgname']}}">
                                     <ul class="product__item__pic__hover">
                                    
 										<input type="hidden" value="1" name="txt_addlike">
 										
                                         <li>
-											<a href="{{route('shop.like',['id'=>$getrunpro['proID']])}}">
+											<a href="{{route('shop.like',['id'=>$pros['proID']])}}">
 												<i class="fa fa-heart"></i>
 											</a>
 										</li>
@@ -159,20 +154,15 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#"><?=$getrunpro['name']?></a></h6>
-                                    <h5>$<?=number_format($getrunpro['saleOff'],2)?></h5>
+                                    <h6><a href="#"><?=$pros['name']?></a></h6>
+                                    <h5>$<?=number_format($pros['price']-$pros['disc'],2)?></h5>
                                 </div>
                             </div>
                         </div>
-                        <?php
-							}
-						?>
+                    @endforeach
                     </div>
-                    <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                    <div>
+                    {{$pro->links('pagination::bootstrap-4')}}
                     </div>
                 </div>
             </div>

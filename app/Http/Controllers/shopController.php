@@ -14,7 +14,12 @@ class shopController extends Controller
      */
     public function index()
     {
-        return view('shop');
+        $pro = addproducts::join('tbl_image','tbl_products.imgID','=','tbl_image.imgID')
+                                ->join('tbl_category','tbl_products.cateID','=','tbl_category.cateID')
+                                ->join('tbl_discount','tbl_products.discountID','=','tbl_discount.discountID')
+                                ->select('tbl_products.*','tbl_products.liker as liker','tbl_image.imgname as imgname', 'tbl_category.name as catename', 'tbl_discount.discountPerent as disc')
+                                ->paginate(12);
+        return view('shop',compact('pro'));
     }
 
     /**
