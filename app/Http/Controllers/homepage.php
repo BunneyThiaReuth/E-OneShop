@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class homepage extends Controller
 {
-    public function Index(){
-
-        
+    public function Index()
+    {
         return view('index');
     }
 }

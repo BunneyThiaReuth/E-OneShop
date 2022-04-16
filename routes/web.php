@@ -59,3 +59,7 @@ Route::get('/register',function(){
 Route::get('/documentation',function(){
     return view('admin.documentation');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
