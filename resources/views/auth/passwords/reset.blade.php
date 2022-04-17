@@ -2,21 +2,24 @@
 
 @section('content')
 <div class="container">
+                <div class="mt-5 d-flex justify-content-center">
+                    <img src="{{ URL::asset('admin/assets/images/favicon.png')}}" alt="Logo" style="width:40px;">
+                    <h1 class="text-primary"> <storng>Reset Password</storng></h1>
+                </div>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+        <div class="col">
+            <div class="d-flex justify-content-center">
 
-                <div class="panel-body">
+                <div class="w-50">
                     <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class=" control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
+                            <div >
                                 <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
@@ -28,9 +31,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class=" control-label">Password</label>
 
-                            <div class="col-md-6">
+                            <div>
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -42,8 +45,8 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                            <div class="col-md-6">
+                            <label for="password-confirm" class=" control-label">Confirm Password</label>
+                            <div>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
                                 @if ($errors->has('password_confirmation'))
@@ -55,7 +58,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
+                            <div>
                                 <button type="submit" class="btn btn-primary">
                                     Reset Password
                                 </button>

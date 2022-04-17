@@ -35,10 +35,8 @@ Route::get('/contact',function(){
 
 Route::get('/admins',function(){
     return view('admin.index');
-});
-Route::get('/ticketlist',function(){
-    return view('admin.ticketlist');
-});
+})->middleware('CheckIsAdmind');
+
 Route::resource('/infor','infoController');
 Route::get('/infor/infor/{id}','infoController@endisable')->name('infor.endisable');
 Route::resource('/sliders','sliderController');
@@ -56,10 +54,6 @@ Route::get('/login',function(){
 Route::get('/register',function(){
     return view('admin.register');
 });
-Route::get('/documentation',function(){
-    return view('admin.documentation');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

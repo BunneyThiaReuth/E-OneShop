@@ -32,14 +32,30 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
 
-                            <div class="header__top__right__auth">
-                                <a href="/login"><i class="fa fa-user"></i> Login</a>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="d-flex justify-content-end p-2">
+
+                            <div >
+
+                                @if(!(Auth::check()))
+                                <span><a href="/login"><i class="fa fa-user"></i> Login</a></span>
+                                @else
+                                <i class="fa fa-user"></i>
+                                <span class="mr-5">
+                                    {{Auth::user()->name}}
+                                </span>
+                                <span class="sidebar-link sidebar-link" aria-expanded="false" onClick="document.getElementById('logout').submit();" style="cursor: pointer">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span class="hide-menu">Logout</span>
+                                    <form action="{{ route('logout') }}" method="post" id="logout">
+                                    {{ csrf_field() }}
+                                    </form>
+                                </span>
+                                @endif
                             </div>
-                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

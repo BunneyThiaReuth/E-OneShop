@@ -63,20 +63,14 @@
                                 </span></a>
                         </li>
                         <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/documentation"
-                                aria-expanded="false"><i data-feather="edit-3" class="feather-icon"></i><span
-                                    class="hide-menu">Documentation</span></a></li>
                         <li class="sidebar-item"> 
-                            <a class="sidebar-link sidebar-link" href="authentication-login1.html" aria-expanded="false">
+                            <p class="sidebar-link sidebar-link" aria-expanded="false" onClick="document.getElementById('logout').submit();" style="cursor: pointer">
                                 <i data-feather="log-out" class="feather-icon"></i>
                                 <span class="hide-menu">Logout</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item"> 
-                            <a class="sidebar-link sidebar-link" href="/" aria-expanded="false">
-                                <i data-feather="eye" class="feather-icon"></i>
-                                <span class="hide-menu">View</span>
-                            </a>
+								<form action="{{ route('logout') }}" method="post" id="logout">
+                                {{ csrf_field() }}
+								</form>
+                            </p>
                         </li>
                     </ul>
                 </nav>
